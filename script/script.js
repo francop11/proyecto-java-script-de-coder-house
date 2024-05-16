@@ -3,7 +3,7 @@
 //alerts
 alert("En este programa deberas realizar un pedido de libros y a donde deseas resivirlo")
 alert("ATENCION!!SOLO PUEDES SOLICITAR HASTA 10 LIBROS")
-alert("Por favor selecciona una opcion: \n 1)Ver listado de libros no disponibles \n 2)Solicitar libro \n 3)Realizar pedido  \n 4)Ver listado de libros recien agregados al stock " )
+alert("Por favor selecciona una opcion: \n 1)Ver listado de libros no disponibles \n 2)Solicitar libro \n 3)Realizar pedido  \n 4)Ver listado de libros recien agregados al stock  \n 5)recomendacion de libro " )
 
 //variable que inicia el ciclo switch
 let opcionUsuario=prompt("ingrese una opcion")
@@ -83,14 +83,33 @@ switch(opcionUsuario){
           //creamos una funcion de corroborar que usara el metodo filter para mostrar los libros con estado usado(false)
           function corroborarEstadoDeLibro(){
           let buscarEstadoDeLibro=librosNuevos.filter(condicionDeLibro=>condicionDeLibro.nuevo===false)
-          //dentro iniciamos un for each para que nos muestre el nnombre de los libros usados
+          //dentro iniciamos un for each para que nos muestre el nombre de los libros usados
          buscarEstadoDeLibro.forEach(function(estado){
             alert(estado.nombre)
          })
       }corroborarEstadoDeLibro()
 
    break
-  
+   case"5":
+   //aca el programa recomendara al usuario un libro al azar
+   //0=LA AVENTURA MAS GRANDE JAMAS CONTADA (LOS 4 FANTASTICOS)-| ERIK LARSEN |
+   //1=A LA CAZA DEL HACKER-| BRUCE STERLING |
+   //2=JUVENTUD,REBELDIA Y REVOLUCION-| ALEJANDRO SAN FRANCISCO |
+   alert("Aca el programa te recomendara un libro al azar,esperamos lo disfrutes")
+   //creamos la funcion libroalazar que tendra una variable con match random para elegir un libro aleatrio entre los tres mencionados arriba
+   function libroAlAzar(){
+      let computadora=Math.floor(Math.random()*3)
+
+      if(computadora==0){
+         alert("Podria recomendarte : LA AVENTURA MAS GRANDE JAMAS CONTADA (LOS 4 FANTASTICOS)-| ERIK LARSEN |")
+      }else if(computadora==1){
+         alert("Podria recomendarte : A LA CAZA DEL HACKER-| BRUCE STERLING |")
+      }else if(computadora==2){
+         alert("Podria recomendarte : JUVENTUD,REBELDIA Y REVOLUCION-| ALEJANDRO SAN FRANCISCO |")
+      }
+      
+   }libroAlAzar()
+  break
           
    default:
       alert("!!ERROR!!,no selecionaste una opcion valida")
