@@ -1,6 +1,6 @@
 ///variables del programa
-//arreglo de pedidos vacio
-let arregloPedidos=[]
+// Arreglo de pedidos inicializado con el contenido de localStorage o un arreglo vacío si no hay nada en localStorage
+let arregloPedidos= JSON.parse(localStorage.getItem("pedidos")) || [];
 //variable de los divs
 let divConfirmaciones=document.querySelector(".confirmaciones")
 //variables de los botones
@@ -12,7 +12,7 @@ let inputAutor=document.querySelector("#autor")
 let inputDireccion=document.querySelector("#direccion")
 //variable de la ul
 let listaDesordenada=document.querySelector("#listaDesordenada")
-//variable del espan para generar numero de pedido aleatorio
+//variable del span para generar numero de pedido aleatorio
 let numeroPedido=document.querySelector("#pedido")
 
 //funciones
@@ -34,8 +34,43 @@ function borrarNroPedido(){
    numeroPedido.textContent=""
 }
 
+// Función para guardar los pedidos en el almacenamiento local
+function guardarPedidosEnLocalStorage() {
+   localStorage.setItem("pedidos", JSON.stringify(arregloPedidos));
+}
 
-//instanciamos un objeto con calse pedido que tiene su metodo crearitems
+// Función para cargar los pedidos guardados en el almacenamiento local al iniciar la página
+function cargarPedidosDesdeLocalStorage() {
+   arregloPedidos.forEach(pedido => {
+      let item = new Pedido(pedido.nombre, pedido.autor, pedido.direccion);
+   });
+}
+//ah window le damos un evento de load para que al cargar la pagina sigan apreciendo los pedidos cargados
+window.addEventListener("load", function() {
+   cargarPedidosDesdeLocalStorage();
+});
+
+//creamos una funcion para que el numero de pedidos siga apreciendo despues de recargar la pagina y lo guarde en local storage
+function generarYGuardarNumeroPedidoAleatorio() {
+   let numeroPedidoAleatorio = randomNumber()//guardamos en la variable a la funcion randomnumber que genera el pedido;
+   localStorage.setItem("numeroPedidoAleatorio", numeroPedidoAleatorio);
+   numeroPedido.textContent = "Nro. de pedido: " + numeroPedidoAleatorio;
+}
+
+//en esta funcion traemos del local storage al numero de pedido guardado
+function cargarNumeroPedidoAleatorioDesdeLocalStorage() {
+   let numeroPedidoGuardado = localStorage.getItem("numeroPedidoAleatorio");
+   if (numeroPedidoGuardado) {
+      numeroPedido.textContent = "Nro. de pedido: " + numeroPedidoGuardado;
+   }
+}
+//ah window le damos un evento de load para que al cargar la pagina sigan apreciendo el numero de pedido
+window.addEventListener("load", function() {
+   cargarNumeroPedidoAleatorioDesdeLocalStorage();
+});
+
+
+//instanciamos un objeto con clase pedido que tiene su metodo crearitems
 class Pedido{
    constructor(nombre,autor,direccion){
       this.nombre=nombre
@@ -48,6 +83,7 @@ class Pedido{
       let listItems=document.createElement("li")
       listItems.textContent="✓ El libro titulado " + nombre + ", del autor  " + autor + " será llevado a  la dirección " + direccion
       listaDesordenada.appendChild(listItems)
+      
    }
 
 }
@@ -57,13 +93,15 @@ class Pedido{
 //en la funcion definira el numero de pedidos maximo es 5 en ese caso el condicional valida
 //que se llenen los campos y que al cargarlos no supere 5 pedidos
 botonCargar.addEventListener("click",function(){
-   if (inputNombre.value && inputAutor.value && inputDireccion.value){
+   if (inputNombre.value && inputAutor.value && inputDireccion.value ){
       //en este condicional vamos validando con el obejto instanciado y tomando el valor de cada input con value
       //y se ira agregando al arreglo vacio con push
 if(arregloPedidos.length < 5){
    let item=new Pedido(inputNombre.value,inputAutor.value,inputDireccion.value )
    borrarInputs()
    arregloPedidos.push(item)
+   guardarPedidosEnLocalStorage(); // Guardar los pedidos al agregar uno nuevo
+   
 }else{alert("Has llegado al limite de libros por pedido")
    borrarInputs()
 }}
@@ -71,8 +109,8 @@ else {alert("no han sido completado todos los campos")
    borrarInputs()
    //en este condicional generamos un nuero de pedido al azar
 }if (arregloPedidos.length == 1){
-        
-   numeroPedido.textContent = "Nro. de pedido: " + randomNumber()
+   generarYGuardarNumeroPedidoAleatorio();
+   
 }
 
 })
@@ -88,13 +126,5 @@ botonRefrescar.addEventListener("click",function(){
    arregloPedidos=[]
    borrarInputs()
    borrarNroPedido()
+   localStorage.removeItem("pedidos");
 })   
-
-
-
-
-
-
-
-
-
