@@ -59,11 +59,10 @@ function generarYGuardarNumeroPedidoAleatorio() {
 
 //en esta funcion traemos del local storage al numero de pedido guardado
 function cargarNumeroPedidoAleatorioDesdeLocalStorage() {
-   let numeroPedidoGuardado = localStorage.getItem("numeroPedidoAleatorio");
-   if (numeroPedidoGuardado) {
-      numeroPedido.textContent = "Nro. de pedido: " + numeroPedidoGuardado;
-   }
-}
+   let numeroPedidoGuardado = localStorage.getItem("numeroPedidoAleatorio")
+   numeroPedidoGuardado ? numeroPedido.textContent = "Nro. de pedido: " + numeroPedidoGuardado : null }//aplicamos operador ternario
+
+   
 //ah window le damos un evento de load para que al cargar la pagina sigan apreciendo el numero de pedido
 window.addEventListener("load", function() {
    cargarNumeroPedidoAleatorioDesdeLocalStorage();
@@ -102,13 +101,14 @@ if(arregloPedidos.length < 5){
    arregloPedidos.push(item)
    guardarPedidosEnLocalStorage(); // Guardar los pedidos al agregar uno nuevo
    
-}else{alert("Has llegado al limite de libros por pedido")
-   borrarInputs()
+}else{
+borrarInputs()//si el usuario supera los 5 pedidos se borraran los inputs
 }}
-else {alert("no han sido completado todos los campos")
-   borrarInputs()
-   //en este condicional generamos un nuero de pedido al azar
-}if (arregloPedidos.length == 1){
+else {
+   borrarInputs()//si el usuario no completa todos los campos se borran los inputs
+   
+}
+if (arregloPedidos.length == 1){//en este condicional generamos un nuero de pedido al azar
    generarYGuardarNumeroPedidoAleatorio();
    
 }
