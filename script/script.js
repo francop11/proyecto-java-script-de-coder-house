@@ -42,8 +42,9 @@ function guardarPedidosEnLocalStorage() {
 // Función para cargar los pedidos guardados en el almacenamiento local al iniciar la página
 function cargarPedidosDesdeLocalStorage() {
    arregloPedidos.forEach(pedido => {
-      let item = new Pedido(pedido.nombre, pedido.autor, pedido.direccion);
-   });
+      let { nombre, autor, direccion } = pedido; // Desestructuración del objeto pedido
+      let item = new Pedido(nombre, autor, direccion)//desestruturamos el objeto dentro del array para obtener las propiedades de cada pedido
+   })
 }
 //ah window le damos un evento de load para que al cargar la pagina sigan apreciendo los pedidos cargados
 window.addEventListener("load", function() {
@@ -97,6 +98,7 @@ botonCargar.addEventListener("click",function(){
       //y se ira agregando al arreglo vacio con push
 if(arregloPedidos.length < 5){
    let item=new Pedido(inputNombre.value,inputAutor.value,inputDireccion.value )
+   let { nombre, autor, direccion } = item; // Desestructuración del objeto item
    borrarInputs()
    arregloPedidos.push(item)
    guardarPedidosEnLocalStorage(); // Guardar los pedidos al agregar uno nuevo
