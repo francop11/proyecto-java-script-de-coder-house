@@ -71,23 +71,52 @@ window.addEventListener("load", function() {
 
 
 //instanciamos un objeto con clase pedido que tiene su metodo crearitems
-class Pedido{
-   constructor(nombre,autor,direccion){
-      this.nombre=nombre
-      this.autor=autor
-      this.direccion=direccion
-      this.cargarItems(nombre,autor,direccion)
+class Pedido {
+   constructor(nombre, autor, direccion) {
+       this.nombre = nombre;
+       this.autor = autor;
+       this.direccion = direccion;
+       this.cargarItems(nombre, autor, direccion);
    }
-   ///el metodo creara los li que iran dentro de los ul
-   cargarItems(nombre,autor,direccion){
-      let listItems=document.createElement("li")
-      listItems.textContent="✓ El libro titulado " + nombre + ", del autor  " + autor + " será llevado a  la dirección " + direccion
-      listaDesordenada.appendChild(listItems)
+
+   cargarItems(nombre, autor, direccion) {
+       let listItems = document.createElement("li")
+       listItems.textContent = "✓ El libro titulado " + nombre + ", del autor " + autor + " será llevado a la dirección " + direccion
+
+       // Crear botón de borrar
+       let botonBorrar = document.createElement("button")
+       botonBorrar.innerHTML= "<i class='fas fa-trash'></i>"
+       listItems.appendChild(botonBorrar)
+
+       // Añadir evento al botón de borrar
+       botonBorrar.addEventListener("click", () => {
+           this.borrarPedido(listItems)
+           Toastify({
+            text: "Pedido borrado con exito ✔",
+            duration: 2000,
+            className: 'toastifyBorrar'
+        }).showToast();
+       })
+
+   //     
+
       
+
+       listaDesordenada.appendChild(listItems)
    }
 
-}
+   
 
+   borrarPedido(listItems) {
+       // Remover el elemento del DOM
+       listaDesordenada.removeChild(listItems)
+
+       // Remover el pedido del arreglo y actualizar el localStorage
+       arregloPedidos = arregloPedidos.filter(pedido => !(pedido.nombre === this.nombre && pedido.autor === this.autor && pedido.direccion === this.direccion))
+       guardarPedidosEnLocalStorage()
+   }
+   
+}
 //definimos el comportamiento de los botones
 //boton cargar
 //en la funcion definira el numero de pedidos maximo es 5 en ese caso el condicional valida
@@ -100,15 +129,33 @@ if(arregloPedidos.length < 5){
    let item=new Pedido(inputNombre.value,inputAutor.value,inputDireccion.value )
    let { nombre, autor, direccion } = item; // Desestructuración del objeto item
    borrarInputs()
+   Toastify({
+      text: "Pedido cargado con exito ✔",
+      duration: 2000,
+      className: 'toastifyCargar',
+  }).showToast();
+  
+
    arregloPedidos.push(item)
    guardarPedidosEnLocalStorage(); // Guardar los pedidos al agregar uno nuevo
    
 }else{
-borrarInputs()//si el usuario supera los 5 pedidos se borraran los inputs
+   borrarInputs()
+   Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Ya no puedes ingresar mas pedidos",
+    });//si el usuario supera los 5 pedidos se borraran los inputs y se implementa un alert con la libreria sweetalert
 }}
 else {
-   borrarInputs()//si el usuario no completa todos los campos se borran los inputs
-   
+//libreria sweetalert para cuando el usuario no complete todos los campos
+    Swal.fire({
+       title: "Debes completar todos los campos",
+       icon: "info",
+      showCloseButton: true,
+      focusConfirm: false,
+      cancelButtonAriaLabel: "Thumbs down"
+    });
 }
 if (arregloPedidos.length == 1){//en este condicional generamos un nuero de pedido al azar
    generarYGuardarNumeroPedidoAleatorio();
@@ -130,3 +177,4 @@ botonRefrescar.addEventListener("click",function(){
    borrarNroPedido()
    localStorage.removeItem("pedidos");
 })   
+
