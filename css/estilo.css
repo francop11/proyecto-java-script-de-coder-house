@@ -84,28 +84,6 @@ button:hover {
     font-size: 20px;
  }
 
-
- .toastifyCargar{
-    background-color: #c3112d;
-    color: white;
-    width: 30%;
-    margin-left: 5px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    padding: 5px;
-    border-radius: 40% ;
- }
-
- .toastifyBorrar{
-    background-color: black;
-    color: white;
-    width: 30%;
-    margin-left: 900px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    padding: 5px;
-    border-radius: 40%;
- }
-
-
  .swal2-popup{
 background-color: #0a1f44;
 color: white;

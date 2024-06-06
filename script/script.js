@@ -69,7 +69,6 @@ window.addEventListener("load", function() {
    cargarNumeroPedidoAleatorioDesdeLocalStorage();
 });
 
-
 //instanciamos un objeto con clase pedido que tiene su metodo crearitems
 class Pedido {
    constructor(nombre, autor, direccion) {
@@ -92,10 +91,17 @@ class Pedido {
        botonBorrar.addEventListener("click", () => {
            this.borrarPedido(listItems)
            Toastify({
-            text: "Pedido borrado con exito ✔",
-            duration: 2000,
-            className: 'toastifyBorrar'
-        }).showToast();
+            text: "Pedido eliminado ✔",
+            duration: 3000,
+            newWindow: true,
+            close: true,
+            gravity: "bottom", 
+            position: "right", 
+            stopOnFocus: true,
+            style: {
+               background: "linear-gradient(to right, #ff1e42 , #96c93d)",
+             },
+         }).showToast();
        })
 
    //     
@@ -130,10 +136,17 @@ if(arregloPedidos.length < 5){
    let { nombre, autor, direccion } = item; // Desestructuración del objeto item
    borrarInputs()
    Toastify({
-      text: "Pedido cargado con exito ✔",
-      duration: 2000,
-      className: 'toastifyCargar',
-  }).showToast();
+      text: "Pedido cargado ✔",
+      duration: 3000,
+      newWindow: true,
+      close: true,
+      gravity: "bottom", 
+      position: "left", 
+      stopOnFocus: true, 
+      style: {
+         background: "linear-gradient(to right, #00b09b, #96c93d)",
+       },
+   }).showToast();
   
 
    arregloPedidos.push(item)
