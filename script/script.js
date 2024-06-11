@@ -170,7 +170,7 @@ else {
       cancelButtonAriaLabel: "Thumbs down"
     });
 }
-if (arregloPedidos.length == 1){//en este condicional generamos un nuero de pedido al azar
+if (arregloPedidos.length == 1){//en este condicional generamos un numero de pedido al azar
    generarYGuardarNumeroPedidoAleatorio();
    
 }
@@ -191,3 +191,52 @@ botonRefrescar.addEventListener("click",function(){
    localStorage.removeItem("pedidos");
 })   
 
+
+
+// async function getRandomBookFromOpenLibrary() {
+//    const randomSubject = 'fiction'; // Puedes cambiar el tema
+//    const randomOffset = Math.floor(Math.random() * 1000);
+//    const url = `https://openlibrary.org/subjects/${randomSubject}.json?limit=1&offset=${randomOffset}`;
+
+//    try {
+//        const response = await fetch(url);
+//        if (!response.ok) {
+//            throw new Error(`HTTP error! status: ${response.status}`);
+//        }
+//        const data = await response.json();
+//        if (data.works && data.works.length > 0) {
+//            return data.works[0];
+//        } else {
+//            return "No books found.";
+//        }
+//    } catch (error) {
+//        console.error('Error fetching data:', error);
+//        return "Error fetching data.";
+//    }
+// }
+
+// // Ejemplo de uso
+// getRandomBookFromOpenLibrary().then(book => {
+//    console.log(book);
+// });
+
+let div1=document.querySelector(".libroAlAzar")
+fetch("./script/api.json")
+.then(response=>response.json())
+.then(data=>{
+   mostrarLibros(data)
+})
+
+function mostrarLibros(libros){
+libros.forEach(libro=>{
+   let button=document.querySelector("#click")
+   
+   button.addEventListener("click",function(){
+      let p=document.createElement("p")
+      p.innerHTML=libro.nombre
+      div1.append(p)
+
+   })
+  
+})
+}

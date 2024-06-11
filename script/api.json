@@ -1,0 +1,6 @@
+[
+    { "id": "libro1", "nombre": "The Great Gatsby", "precio": 1500 },
+    { "id": "libro2", "nombre": "1984", "precio": 2500 },
+    { "id": "libro3", "nombre": "To Kill a Mockingbird", "precio": 3500 },
+    { "id": "libro4", "nombre": "Pride and Prejudice", "precio": 4500 }
+]
