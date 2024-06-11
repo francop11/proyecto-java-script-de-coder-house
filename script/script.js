@@ -188,30 +188,31 @@ botonRefrescar.addEventListener("click",function(){
    arregloPedidos=[]
    borrarInputs()
    borrarNroPedido()
-   localStorage.removeItem("pedidos");
+   localStorage.removeItem("pedidos")
 })   
 
 
 
 
-let div1 = document.querySelector(".libroAlAzar");
-let button = document.querySelector("#click");
+let divLibroAlAzar = document.querySelector(".libroAlAzar")
+let buttonLibroAlAzar = document.querySelector("#libroAleatorio")
 
-button.addEventListener("click", function() {
-    // Limpiar el contenido anterior del contenedor
-    div1.innerHTML = "";
+buttonLibroAlAzar.addEventListener("click", function() {
+    // Limpiamos el contenido anterior del contenedor
+    divLibroAlAzar.innerHTML = "";
 
-    fetch("./script/api.json")
+    //utilizamos fetch para traer datos de un archivo json de forma local
+    fetch("./script/libros.json")
     .then(response => response.json())
     .then(data => {
-        // Obtener un índice aleatorio para seleccionar un libro aleatorio del arreglo
-        let randomIndex = Math.floor(Math.random() * data.length);
-        let libro = data[randomIndex];
+        // obtenemos un indice para obtener un pedido aleatorio del arreglo
+        let libroRandom = Math.floor(Math.random() * data.length)
+        let libro = data[libroRandom]//la varibale libro obtiene el libro aleatorio traido del arreglo
 
-        // Crear un elemento <p> para mostrar el nombre del libro
-        let p = document.createElement("p");
-        p.innerHTML = libro.nombre;
-        div1.append(p);
+        // Creamos un parrafo para obtener el nombre del libro
+        let p = document.createElement("p")
+        p.innerHTML ="Podria recomendarte el libro :<br> "+  libro.nombre +"<br> Del autor :<br>"+libro.autor
+        divLibroAlAzar.append(p)//agregamos el p al contenedor
     })
     
 });

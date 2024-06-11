@@ -1,0 +1,10 @@
+[
+    { "id": "libro1", "nombre": "The Great Gatsby", "autor": "F. Scott Fitzgerald" },
+    { "id": "libro2", "nombre": "1984", "autor": "George Orwell" },
+    { "id": "libro3", "nombre": "To Kill a Mockingbird", "autor": "Harper Lee" },
+    { "id": "libro4", "nombre": "Pride and Prejudice", "autor": "Jane Austen" },
+    { "id": "libro5", "nombre": "The Catcher in the Rye", "autor": "J.D. Salinger" },
+    { "id": "libro6", "nombre": "The Lord of the Rings", "autor": "J.R.R. Tolkien" },
+    { "id": "libro7", "nombre": "Harry Potter and the Philosopher's Stone", "autor": "J.K. Rowling" },
+    { "id": "libro8", "nombre": "The Hobbit", "autor": "J.R.R. Tolkien" }
+]
