@@ -102,6 +102,24 @@ color: white;
    
     width: 250px;
     height: 250px;
-    margin-top: 20px;
+    margin-top: 40px;
     border-radius: 50%;
+ }
+ a{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    background-color: #ff1e42;
+    font-weight: 00;
+    margin: 5px;
+    padding: 5px;
+ }
+
+ a:hover {
+    background: #c3112d;
+ }
+
+
+ #click{
+    letter-spacing: 5px;
+    
  }
