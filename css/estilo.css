@@ -97,3 +97,11 @@ color: white;
  .swal2-icon {
     color: #ff1e42 !important;
  }
+
+ .pensandoEnLibro{
+   
+    width: 250px;
+    height: 250px;
+    margin-top: 20px;
+    border-radius: 50%;
+ }

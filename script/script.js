@@ -150,7 +150,7 @@ if(arregloPedidos.length < 5){
   
 
    arregloPedidos.push(item)
-   guardarPedidosEnLocalStorage(); // Guardar los pedidos al agregar uno nuevo
+   guardarPedidosEnLocalStorage() // Guardar los pedidos al agregar uno nuevo
    
 }else{
    borrarInputs()
@@ -158,7 +158,7 @@ if(arregloPedidos.length < 5){
       icon: "error",
       title: "Oops...",
       text: "Ya no puedes ingresar mas pedidos",
-    });//si el usuario supera los 5 pedidos se borraran los inputs y se implementa un alert con la libreria sweetalert
+    })//si el usuario supera los 5 pedidos se borraran los inputs y se implementa un alert con la libreria sweetalert
 }}
 else {
 //libreria sweetalert para cuando el usuario no complete todos los campos
@@ -193,50 +193,32 @@ botonRefrescar.addEventListener("click",function(){
 
 
 
-// async function getRandomBookFromOpenLibrary() {
-//    const randomSubject = 'fiction'; // Puedes cambiar el tema
-//    const randomOffset = Math.floor(Math.random() * 1000);
-//    const url = `https://openlibrary.org/subjects/${randomSubject}.json?limit=1&offset=${randomOffset}`;
 
-//    try {
-//        const response = await fetch(url);
-//        if (!response.ok) {
-//            throw new Error(`HTTP error! status: ${response.status}`);
-//        }
-//        const data = await response.json();
-//        if (data.works && data.works.length > 0) {
-//            return data.works[0];
-//        } else {
-//            return "No books found.";
-//        }
-//    } catch (error) {
-//        console.error('Error fetching data:', error);
-//        return "Error fetching data.";
-//    }
-// }
+let div1 = document.querySelector(".libroAlAzar");
+let button = document.querySelector("#click");
 
-// // Ejemplo de uso
-// getRandomBookFromOpenLibrary().then(book => {
-//    console.log(book);
-// });
+button.addEventListener("click", function() {
+    // Limpiar el contenido anterior del contenedor
+    div1.innerHTML = "";
 
-let div1=document.querySelector(".libroAlAzar")
-fetch("./script/api.json")
-.then(response=>response.json())
-.then(data=>{
-   mostrarLibros(data)
-})
+    fetch("./script/api.json")
+    .then(response => response.json())
+    .then(data => {
+        // Obtener un índice aleatorio para seleccionar un libro aleatorio del arreglo
+        let randomIndex = Math.floor(Math.random() * data.length);
+        let libro = data[randomIndex];
 
-function mostrarLibros(libros){
-libros.forEach(libro=>{
-   let button=document.querySelector("#click")
-   
-   button.addEventListener("click",function(){
-      let p=document.createElement("p")
-      p.innerHTML=libro.nombre
-      div1.append(p)
+        // Crear un elemento <p> para mostrar el nombre del libro
+        let p = document.createElement("p");
+        p.innerHTML = libro.nombre;
+        div1.append(p);
+    })
+    
+});
 
-   })
-  
-})
-}
+ 
+
+ 
+ 
+
+
