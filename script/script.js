@@ -14,6 +14,9 @@ let inputDireccion=document.querySelector("#direccion")
 let listaDesordenada=document.querySelector("#listaDesordenada")
 //variable del span para generar numero de pedido aleatorio
 let numeroPedido=document.querySelector("#pedido")
+//variables que se usaran para traer libros desde el archivo json
+let divLibroAlAzar = document.querySelector(".libroAlAzar")
+let buttonLibroAlAzar = document.querySelector("#libroAleatorio")
 
 //funciones
 //funcion para borrar todos los inputs
@@ -177,7 +180,6 @@ if (arregloPedidos.length == 1){//en este condicional generamos un numero de ped
 
 })
 
-
 //boton refrescar
 botonRefrescar.addEventListener("click",function(){
    //seleccionamos todos los li y los recorremos al arreglo con for of y los removemos de la lista
@@ -192,11 +194,7 @@ botonRefrescar.addEventListener("click",function(){
 })   
 
 
-
-
-let divLibroAlAzar = document.querySelector(".libroAlAzar")
-let buttonLibroAlAzar = document.querySelector("#libroAleatorio")
-
+//aca generamos un libro al azar
 buttonLibroAlAzar.addEventListener("click", function() {
     // Limpiamos el contenido anterior del contenedor
     divLibroAlAzar.innerHTML = "";
